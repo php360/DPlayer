@@ -23,13 +23,13 @@ class Controller {
         }
 
         this.initPlayButton();
-        this.initThumbnails();
+        // this.initThumbnails();
         this.initPlayedBar();
         this.initFullButton();
         this.initQualityButton();
         this.initScreenshotButton();
         this.initSubtitleButton();
-        this.initHighlights();
+        // this.initHighlights();
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
@@ -116,35 +116,37 @@ class Controller {
             this.player.timer.enable('progress');
         };
 
-        this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragStart, () => {
-            this.player.timer.disable('progress');
-            document.addEventListener(utils.nameMap.dragMove, thumbMove);
-            document.addEventListener(utils.nameMap.dragEnd, thumbUp);
-        });
+        if (this.player.options.canseek) {
+            this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragStart, () => {
+                this.player.timer.disable('progress');
+                document.addEventListener(utils.nameMap.dragMove, thumbMove);
+                document.addEventListener(utils.nameMap.dragEnd, thumbUp);
+            });
 
-        this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragMove, (e) => {
-            if (this.player.video.duration) {
-                const px = utils.cumulativeOffset(this.player.template.playedBarWrap).left;
-                const tx = (e.clientX || e.changedTouches[0].clientX) - px;
-                if (tx < 0 || tx > this.player.template.playedBarWrap.offsetWidth) {
-                    return;
+            this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragMove, (e) => {
+                if (this.player.video.duration) {
+                    const px = utils.cumulativeOffset(this.player.template.playedBarWrap).left;
+                    const tx = (e.clientX || e.changedTouches[0].clientX) - px;
+                    if (tx < 0 || tx > this.player.template.playedBarWrap.offsetWidth) {
+                        return;
+                    }
+                    const time = this.player.video.duration * (tx / this.player.template.playedBarWrap.offsetWidth);
+                    if (utils.isMobile) {
+                        this.thumbnails && this.thumbnails.show();
+                    }
+                    this.thumbnails && this.thumbnails.move(tx);
+                    this.player.template.playedBarTime.style.left = `${(tx - (time >= 3600 ? 25 : 20))}px`;
+                    this.player.template.playedBarTime.innerText = utils.secondToTime(time);
+                    this.player.template.playedBarTime.classList.remove('hidden');
                 }
-                const time = this.player.video.duration * (tx / this.player.template.playedBarWrap.offsetWidth);
+            });
+
+            this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragEnd, () => {
                 if (utils.isMobile) {
-                    this.thumbnails && this.thumbnails.show();
+                    this.thumbnails && this.thumbnails.hide();
                 }
-                this.thumbnails && this.thumbnails.move(tx);
-                this.player.template.playedBarTime.style.left = `${(tx - (time >= 3600 ? 25 : 20))}px`;
-                this.player.template.playedBarTime.innerText = utils.secondToTime(time);
-                this.player.template.playedBarTime.classList.remove('hidden');
-            }
-        });
-
-        this.player.template.playedBarWrap.addEventListener(utils.nameMap.dragEnd, () => {
-            if (utils.isMobile) {
-                this.thumbnails && this.thumbnails.hide();
-            }
-        });
+            });
+        }
 
         if (!utils.isMobile) {
             this.player.template.playedBarWrap.addEventListener('mouseenter', () => {

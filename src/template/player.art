@@ -127,7 +127,7 @@
             </button>
         </div>
         {{ /if }}
-        <div class="dplayer-setting">
+        <div class="dplayer-setting" style="display:none !important;">
             <button class="dplayer-icon dplayer-setting-icon" data-balloon="{{ tran('Setting') }}" data-balloon-pos="up">
                 <span class="dplayer-icon-content">{{@ icons.setting }}</span>
             </button>
@@ -252,11 +252,11 @@
     </div>
     {{ /if }}
 </div>
-<div class="dplayer-menu">
+<div class="dplayer-menu" style="display:none !important;">
     {{ each options.contextmenu }}
         <div class="dplayer-menu-item">
             <a{{ if $value.link }} target="_blank"{{ /if }} href="{{ $value.link || 'javascript:void(0);' }}">{{ tran($value.text) }}</a>
         </div>
     {{ /each }}
 </div>
-<div class="dplayer-notice"></div>
+<div class="dplayer-notice" style="display:none !important;"></div>

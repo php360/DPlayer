@@ -60,7 +60,7 @@ function initPlayers () {
         preload: 'none',
         screenshot: true,
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
+            url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
             thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg'
         },
@@ -86,7 +86,7 @@ function initPlayers () {
         volume: 0.2,
         mutex: true,
         video: {
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
+            url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
             thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg',
             type: 'auto'
@@ -151,7 +151,7 @@ function initPlayers () {
     //             type: 'hls'
     //         }, {
     //             name: 'SD',
-    //             url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
+    //             url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
     //             type: 'normal'
     //         }],
     //         defaultQuality: 0,
@@ -255,7 +255,7 @@ function switchDPlayer () {
         });
     } else {
         dp2.switchVideo({
-            url: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.mp4',
+            url: 'http://static.smartisanos.cn/common/video/t1-ui.mp4',
             pic: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara.png',
             thumbnails: 'https://moeplayer.b0.upaiyun.com/dplayer/hikarunara_thumbnails.jpg',
             type: 'auto'
